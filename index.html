@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Work & Life · Vocabulary Checkpoint</title><style>
+:root{--bg:#f2f5fb;--light:#d3e5fc;--light2:#e5defa;--text:#192638;--muted:#53637a;--accent:#3976e8;--glass:rgba(255,255,255,.64);--button:rgba(255,255,255,.48);--line:rgba(255,255,255,.8)}
+*{box-sizing:border-box}body{margin:0;min-height:100svh;padding:48px 24px;display:grid;place-items:center;background:radial-gradient(ellipse at 16% 20%,var(--light),transparent 62%),radial-gradient(ellipse at 90% 80%,var(--light2),transparent 65%),var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}main{width:min(100%,980px);padding:40px 44px 30px;border:1px solid var(--line);border-radius:28px;background:var(--glass);backdrop-filter:blur(24px) saturate(120%);-webkit-backdrop-filter:blur(24px) saturate(120%);box-shadow:inset 0 1px 0 var(--line),0 24px 65px #1934521c}header,.footer,.row{display:flex;align-items:center;justify-content:space-between;gap:16px}h1{font-size:18px;font-weight:550;margin:0}.meta{font-size:14px;color:var(--muted)}progress{width:100%;height:8px;border:0;border-radius:20px;overflow:hidden;display:block;margin:19px 0 0;background:color-mix(in srgb,var(--accent) 10%,transparent)}progress::-webkit-progress-bar{background:color-mix(in srgb,var(--accent) 10%,transparent)}progress::-webkit-progress-value{background:var(--accent);border-radius:20px}progress::-moz-progress-bar{background:var(--accent)}.prompt{text-align:center;padding:48px 0 30px}h2{font-size:clamp(32px,6vw,70px);font-weight:650;letter-spacing:-.045em;line-height:1.12;margin:0 0 14px;overflow-wrap:normal}.prompt p{margin:0;color:var(--muted);font-size:17px}.answers{display:grid;grid-template-columns:1fr 1fr;gap:14px}button{font:inherit;color:inherit;cursor:pointer;min-height:46px;border:1px solid var(--line);border-radius:15px;background:var(--button);transition:background .15s,transform .15s}button:focus-visible{outline:3px solid var(--accent);outline-offset:4px}button:hover:enabled{transform:translateY(-1px);background:color-mix(in srgb,var(--button) 70%,var(--bg))}button:active:enabled{transform:scale(.99)}.answer{display:flex;align-items:center;text-align:left;gap:13px;padding:20px;min-height:94px;font-size:18px;line-height:1.4;box-shadow:inset 0 1px 0 var(--line),0 3px 10px #20354c08}.letter{font-size:12px;color:var(--muted);flex:0 0 22px}.answer.wrong{background:#fbe0df;color:#7f2424;border-color:#bf6363}.answer.right{background:#dcefe5;color:#194c35;border-color:#5b987b}.answer.wrong .letter,.answer.right .letter{color:inherit}.answer:disabled{cursor:default}.status{min-height:82px;padding:19px 0 10px;font-size:15px;line-height:1.5}.status p{margin:0}.status .example{color:var(--muted);margin-top:3px}.footer{padding-top:20px;border-top:1px solid color-mix(in srgb,var(--muted) 17%,transparent)}.actions{display:flex;gap:12px}.quiet{background:transparent;border-color:transparent;padding:10px 15px;color:var(--muted)}.primary{background:var(--accent);color:var(--bg);border-color:transparent;padding:11px 27px;font-weight:600}.primary:disabled{opacity:.45;cursor:default}.primary:hover:enabled{background:var(--accent);filter:brightness(1.06)}.theme-label{display:block;font-size:12px;margin-top:5px;color:var(--muted)}#results h2{font-size:42px;margin:30px 0 14px}#results p{color:var(--muted);line-height:1.6}.review{margin:25px 0;max-height:330px;overflow:auto}.review p{margin:0;padding:10px 0;border-bottom:1px solid color-mix(in srgb,var(--muted) 15%,transparent);font-size:15px}.review strong{color:var(--text)}[hidden]{display:none!important}@supports not (backdrop-filter:blur(1px)){main{background:var(--bg)}}@media(max-width:600px){body{padding:20px 12px}main{padding:25px 20px;border-radius:24px}header{align-items:flex-start}h1{font-size:16px}.meta{font-size:13px;white-space:nowrap}.prompt{padding:33px 0 26px}.answers{grid-template-columns:1fr;gap:10px}.answer{min-height:70px;padding:15px;font-size:17px}.footer{align-items:flex-start;flex-direction:column}.actions{width:100%;justify-content:space-between}.status{min-height:94px}.primary{padding-inline:23px}}@media(prefers-reduced-motion:reduce){*{transition:none!important}button:hover:enabled,button:active:enabled{transform:none}}
+</style></head><body><main><header><div><h1>Work & Life</h1><span class="theme-label" id="themeLabel"></span></div><span class="meta" id="learned"></span></header><progress id="progress" max="20" value="0" aria-label="Words learned"></progress><section id="quiz"><div class="prompt"><h2 id="word"></h2><p>Choose the meaning</p></div><div class="answers" id="answers"></div><div class="status" id="status" aria-live="polite" aria-atomic="true"></div><div class="footer"><span class="meta" id="score"></span><div class="actions"><button class="quiet" id="restart">Start over</button><button class="primary" id="next" disabled>Continue</button></div></div></section><section id="results" hidden><h2>Checkpoint complete</h2><p id="summary"></p><div class="review" id="review"></div><button class="primary" id="again">Practice again</button></section></main><script>
+'use strict';
+const words=[
+  [
+    "to deal with",
+    "Handle or take action to solve a problem or situation.",
+    "We need to deal with this problem today."
+  ],
+  [
+    "in charge of",
+    "Responsible for something or someone.",
+    "She is in charge of the project."
+  ],
+  [
+    "temporary",
+    "Not lasting or needed for very long.",
+    "This is a temporary job."
+  ],
+  [
+    "secure",
+    "Free from risk and the threat of change for the worse.",
+    "He wants a secure job."
+  ],
+  [
+    "a perk",
+    "An advantage or something extra that you are given because of your job.",
+    "Free lunches are a perk of the job."
+  ],
+  [
+    "a downside",
+    "A disadvantage.",
+    "The only downside is the long journey to work."
+  ],
+  [
+    "a hazard",
+    "A danger.",
+    "Loose cables can be a hazard."
+  ],
+  [
+    "to turn down",
+    "Not accept an offer, request or application.",
+    "She decided to turn down the job offer."
+  ],
+  [
+    "to keep at something",
+    "Continue doing or working on something, especially when it is difficult.",
+    "Learning takes time, so keep at it."
+  ],
+  [
+    "to keep up with",
+    "Go at the same speed as.",
+    "I walked quickly to keep up with her."
+  ],
+  [
+    "to put things off",
+    "Postpone things; make them happen later.",
+    "Try not to put things off until tomorrow."
+  ],
+  [
+    "long-term",
+    "Lasting a long time.",
+    "We need a long-term solution."
+  ],
+  [
+    "a brainchild",
+    "An idea, plan or creation of one person.",
+    "The new club is her brainchild."
+  ],
+  [
+    "to tilt",
+    "Move or lean something so that one side is higher than the other.",
+    "Tilt the screen towards you."
+  ],
+  [
+    "an amplifier",
+    "A device that increases an audio signal.",
+    "He connected his guitar to an amplifier."
+  ],
+  [
+    "to relate to",
+    "Be connected in some way.",
+    "These questions relate to your work experience."
+  ],
+  [
+    "to pilot",
+    "Fly or operate a vehicle.",
+    "She learned to pilot a small plane."
+  ],
+  [
+    "tough",
+    "Difficult or strong.",
+    "It was a tough decision."
+  ],
+  [
+    "a distraction",
+    "Something that draws attention away.",
+    "My phone can be a distraction when I study."
+  ],
+  [
+    "a win-win situation",
+    "An agreement or situation that is good for both sides.",
+    "The deal is a win-win situation for both companies."
+  ]
+];
+const palettes=[['Pearl blue','#f2f5fb','#d3e5fc','#e5defa','#192638','#53637a','#3976e8','rgba(255,255,255,.64)','rgba(255,255,255,.48)','rgba(255,255,255,.8)'],['Sage','#edf3ef','#d1e3da','#e2ece5','#19352e','#4c675e','#437a68','rgba(255,255,255,.66)','rgba(255,255,255,.48)','rgba(255,255,255,.8)'],['Rose','#faf1f0','#f1d7d9','#f2e7dc','#392735','#745a67','#a65d72','rgba(255,255,255,.67)','rgba(255,255,255,.48)','rgba(255,255,255,.8)'],['Midnight','#101a2c','#233e65','#31364f','#f1f5fc','#b6c7e0','#88b8ff','rgba(25,39,62,.80)','rgba(65,84,110,.46)','rgba(190,215,250,.35)']];
+const $=id=>document.getElementById(id);const shuffle=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+let queue,current,missed,answered,attempts,correct,mastered,seen,firstWins,reviewed,theme=-1,previousOrder='';
+function storageGet(k){try{return localStorage.getItem(k)}catch{return null}}function storageSet(k,v){try{localStorage.setItem(k,v)}catch{}}
+function setTheme(){const stored=Number(storageGet('workLifeGlass.theme')??-1);const previous=theme<0?stored:theme;theme=shuffle([0,1,2,3].filter(n=>n!==previous))[0];storageSet('workLifeGlass.theme',theme);const p=palettes[theme];['bg','light','light2','text','muted','accent','glass','button','line'].forEach((k,i)=>document.documentElement.style.setProperty('--'+k,p[i+1]));$('themeLabel').textContent='Vocabulary checkpoint · '+p[0]}
+function start(){setTheme();queue=shuffle(words.map((_,i)=>i));const old=previousOrder||storageGet('workLifeGlass.order');if(queue.join(',')===old)queue.push(queue.shift());previousOrder=queue.join(',');storageSet('workLifeGlass.order',previousOrder);attempts=0;correct=0;mastered=new Set();seen=new Set();firstWins=0;reviewed=new Set();$('results').hidden=true;$('quiz').hidden=false;show()}
+function update(){const n=mastered.size;$('learned').textContent=n+' / '+words.length+' learned';$('progress').max=words.length;$('progress').value=n;$('score').textContent='Correct: '+correct+' / '+attempts+(attempts?' · '+Math.round(correct/attempts*100)+'%':'')}
+function optionsFor(id){const groups=[[0,7,8,9,10,13,15,16],[1,2,3,11,17],[4,5,6,12,14,18,19]];const candidates=words.map((_,i)=>i).filter(i=>i!==id);const close=groups.find(g=>g.includes(id)).filter(i=>i!==id);const distractors=shuffle(close).slice(0,3);for(const i of shuffle(candidates))if(distractors.length<3&&!distractors.includes(i))distractors.push(i);return shuffle([id,...distractors])}
+function show(){update();if(!queue.length){finish();return}current=queue.shift();missed=false;answered=false;$('word').textContent=words[current][0];$('status').replaceChildren();$('next').disabled=true;$('answers').replaceChildren();optionsFor(current).forEach((id,i)=>{const b=document.createElement('button');b.className='answer';const l=document.createElement('span');l.className='letter';l.textContent='ABCD'[i];const text=document.createElement('span');text.textContent=words[id][1];b.append(l,text);b.onclick=()=>select(id,b,l);$('answers').append(b)})}
+function select(id,b,l){if(answered||b.disabled)return;attempts++;if(id!==current){missed=true;reviewed.add(current);mastered.delete(current);b.disabled=true;b.classList.add('wrong');l.textContent='×';$('status').textContent='Not quite. Try another option.';update();return}correct++;answered=true;b.classList.add('right');l.textContent='✓';if(!seen.has(current)&&!missed)firstWins++;seen.add(current);if(missed)queue.push(current);else mastered.add(current);for(const el of $('answers').children)el.disabled=true;const p=document.createElement('p');p.textContent='✓ Correct — '+words[current][0]+': '+words[current][1];const ex=document.createElement('p');ex.className='example';ex.textContent=words[current][2];$('status').replaceChildren(p,ex);$('next').disabled=false;update()}
+function finish(){$('quiz').hidden=true;$('results').hidden=false;$('summary').textContent='You learned all '+words.length+' words and phrases. First-encounter score: '+firstWins+' / '+words.length+'. Answer accuracy: '+Math.round(correct/attempts*100)+'% ('+correct+' / '+attempts+').';$('review').replaceChildren();const intro=document.createElement('p');intro.textContent=reviewed.size?'Words you practised again:':'All words were correct on the first attempt.';$('review').append(intro);for(const id of reviewed){const p=document.createElement('p');const strong=document.createElement('strong');strong.textContent=words[id][0];p.append(strong,document.createTextNode(' — '+words[id][1]));$('review').append(p)}}
+$('next').onclick=()=>{if(answered)show()};$('restart').onclick=start;$('again').onclick=start;start();
+</script></body></html>
